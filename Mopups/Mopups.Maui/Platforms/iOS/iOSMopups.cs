@@ -18,7 +18,8 @@ internal class iOSMopups : IPopupPlatform
     {
         page.Parent ??= Application.Current?.MainPage;
 
-        page.DescendantRemoved += HandleChildRemoved;
+        // Suggessted fix from https://github.com/LuckyDucko/Mopups/issues/97
+        //page.DescendantRemoved += HandleChildRemoved;
 
         var keyWindow = GetKeyWindow(UIApplication.SharedApplication);
         if (keyWindow?.WindowLevel == UIWindowLevel.Normal)
@@ -82,7 +83,8 @@ internal class iOSMopups : IPopupPlatform
 
         await Task.Delay(50);
 
-        page.DescendantRemoved -= HandleChildRemoved;
+        // Suggessted fix from https://github.com/LuckyDucko/Mopups/issues/97
+        //page.DescendantRemoved -= HandleChildRemoved;
 
         if (handler != null && viewController != null && !viewController.IsBeingDismissed)
         {
